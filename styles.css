@@ -61,7 +61,7 @@ img { max-width: 100%; display: block; }
 .header-inner {
   max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 7px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,10 +92,10 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(180deg, var(--color-gold-bright), var(--color-gold));
   color: var(--color-text-dark);
   text-align: center;
-  padding: 10px 20px;
+  padding: 6px 20px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+  font-size: clamp(0.75rem, 2.2vw, 0.95rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +138,7 @@ img { max-width: 100%; display: block; }
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  padding: 34px 20px 30px;
+  padding: 18px 20px 16px;
   text-align: center;
   overflow: hidden;
   background:
@@ -158,19 +158,21 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-inner { position: relative; max-width: var(--max-width); margin: 0 auto; }
-.hero-mark { width: 42px; height: 42px; margin: 0 auto 12px; }
+.hero-mark { width: 30px; height: 30px; margin: 0 auto 8px; }
 
 .hero h1 {
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 4.5vw, 2.2rem);
   color: var(--color-cream);
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .hero-tagline {
   color: var(--color-gold-bright);
-  letter-spacing: 0.06em;
-  margin: 8px 0 20px;
-  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  margin: 6px 0 14px;
+  font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+  white-space: nowrap;
 }
 
 /* ===== SHOWCASE (flyer + order side by side) ===== */

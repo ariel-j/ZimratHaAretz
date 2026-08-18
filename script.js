@@ -39,26 +39,19 @@ function initLanguageToggle() {
   });
 }
 
-// ===== DISTRIBUTOR / PICKUP LOCATION / CASH OPTION =====
+// ===== DISTRIBUTOR / PICKUP LOCATION =====
 function initDistributorLogic() {
   const distributorSelect = document.getElementById('distributor');
   const pickupLocationField = document.getElementById('pickupLocationField');
   const pickupLocationSelect = document.getElementById('pickupLocation');
-  const paymentMethodSelect = document.getElementById('paymentMethod');
-  const cashOption = document.getElementById('cashOption');
 
   distributorSelect.addEventListener('change', function () {
-    const isPickup = distributorSelect.value === 'pickup';
+    const isCollectionPoint = distributorSelect.value === 'collectionPoint';
 
-    pickupLocationField.hidden = !isPickup;
-    pickupLocationSelect.required = isPickup;
-    if (!isPickup) {
+    pickupLocationField.hidden = !isCollectionPoint;
+    pickupLocationSelect.required = isCollectionPoint;
+    if (!isCollectionPoint) {
       pickupLocationSelect.value = '';
-    }
-
-    cashOption.hidden = !isPickup;
-    if (!isPickup && paymentMethodSelect.value === 'cash') {
-      paymentMethodSelect.value = '';
     }
   });
 }
@@ -117,7 +110,7 @@ function validateOrderForm(formData) {
   if (!formData.distributorChoice) {
     return translate('order.errorDistributor');
   }
-  if (formData.distributorChoice === 'pickup' && !formData.pickupLocation) {
+  if (formData.distributorChoice === 'collectionPoint' && !formData.pickupLocation) {
     return translate('order.errorPickupLocation');
   }
   if (!formData.paymentMethod) {
@@ -132,13 +125,13 @@ const PICKUP_LOCATION_LABELS = {
 };
 
 function buildDistributorText(distributorChoice, pickupLocation) {
-  if (distributorChoice === 'delivery') {
-    return translate('order.delivery');
+  if (distributorChoice !== 'collectionPoint') {
+    return translate('order.pickup');
   }
   const locationLabel = PICKUP_LOCATION_LABELS[pickupLocation]
     ? PICKUP_LOCATION_LABELS[pickupLocation][currentLang]
     : pickupLocation;
-  return translate('order.pickup') + ' - ' + locationLabel;
+  return translate('order.collectionPoint') + ' - ' + locationLabel;
 }
 
 // ===== FORM SUBMISSION =====
@@ -235,7 +228,6 @@ function initOrderForm() {
         form.reset();
         updateTotalPrice();
         document.getElementById('pickupLocationField').hidden = true;
-        document.getElementById('cashOption').hidden = true;
       } else {
         showFormMessage(result.error || translate('order.error'), 'error');
       }
