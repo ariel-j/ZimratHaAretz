@@ -1,9 +1,4 @@
 // ===== CONFIG =====
-// Swap these two placeholders for the real personal payment links once
-// your friend generates them in the Bit and PayBox apps. See README.
-const BIT_PAYMENT_LINK = '';
-const PAYBOX_PAYMENT_LINK = '';
-
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzr6AGn4g936I1iND97vvocOFvtvZqITLurAjRHLOU8j_Mxv7vY6jK9iFmqKMRlZOSS/exec';
 
 const PRICES = { qty1kg: 65, qty500g: 35, qty350g: 25 };
@@ -113,9 +108,6 @@ function validateOrderForm(formData) {
   if (formData.distributorChoice === 'collectionPoint' && !formData.pickupLocation) {
     return translate('order.errorPickupLocation');
   }
-  if (!formData.paymentMethod) {
-    return translate('order.errorPayment');
-  }
   return null;
 }
 
@@ -147,7 +139,6 @@ function collectFormData() {
     qty350g: parseInt(document.getElementById('qty350g').value, 10) || 0,
     distributorChoice: document.getElementById('distributor').value,
     pickupLocation: document.getElementById('pickupLocation').value,
-    paymentMethod: document.getElementById('paymentMethod').value,
     notes: document.getElementById('notes').value.trim()
   };
 }
@@ -158,25 +149,22 @@ function showFormMessage(text, type) {
   messageEl.className = 'form-message ' + type;
 }
 
-function showPaymentPanel(paymentMethod) {
-  const panel = document.getElementById('paymentPanel');
-  const bitButton = document.getElementById('bitPayBtn');
-  const payboxButton = document.getElementById('payboxPayBtn');
-  const cashNote = document.getElementById('cashNote');
-  const instructions = document.getElementById('paymentInstructions');
+function showPaymentPopup() {
+  document.getElementById('paymentModal').classList.remove('hidden');
+}
 
-  const isCash = paymentMethod === 'cash';
+function hidePaymentPopup() {
+  document.getElementById('paymentModal').classList.add('hidden');
+}
 
-  bitButton.style.display = paymentMethod === 'bit' ? 'inline-block' : 'none';
-  payboxButton.style.display = paymentMethod === 'paybox' ? 'inline-block' : 'none';
-  cashNote.classList.toggle('hidden', !isCash);
-  instructions.classList.toggle('hidden', isCash);
-
-  bitButton.href = BIT_PAYMENT_LINK || '#';
-  payboxButton.href = PAYBOX_PAYMENT_LINK || '#';
-
-  panel.classList.remove('hidden');
-  panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+function initPaymentPopup() {
+  const modal = document.getElementById('paymentModal');
+  document.getElementById('closePaymentModal').addEventListener('click', hidePaymentPopup);
+  modal.addEventListener('click', function (event) {
+    if (event.target === modal) {
+      hidePaymentPopup();
+    }
+  });
 }
 
 async function submitOrder(formData) {
@@ -188,7 +176,6 @@ async function submitOrder(formData) {
     qty500g: formData.qty500g,
     qty350g: formData.qty350g,
     distributor: buildDistributorText(formData.distributorChoice, formData.pickupLocation),
-    paymentMethod: formData.paymentMethod,
     notes: formData.notes
   };
 
@@ -226,7 +213,7 @@ function initOrderForm() {
 
       if (result.success) {
         showFormMessage(translate('order.success'), 'success');
-        showPaymentPanel(formData.paymentMethod);
+        showPaymentPopup();
         form.reset();
         updateTotalPrice();
         document.getElementById('pickupLocationField').hidden = true;
@@ -262,5 +249,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initQuantitySteppers();
   initDistributorLogic();
   initOrderForm();
+  initPaymentPopup();
   initProductGallery();
 });

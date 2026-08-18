@@ -153,16 +153,6 @@
       </div>
 
       <div class="field">
-        <label for="paymentMethod" data-i18n="order.paymentMethod">אמצעי תשלום</label>
-        <select id="paymentMethod" name="paymentMethod" required>
-          <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
-          <option value="bit">Bit</option>
-          <option value="paybox">PayBox</option>
-          <option value="cash" data-i18n="order.cash">מזומן באיסוף</option>
-        </select>
-      </div>
-
-      <div class="field">
         <label for="notes" data-i18n="order.notes">הערות (לא חובה)</label>
         <textarea id="notes" name="notes" rows="3"></textarea>
       </div>
@@ -171,20 +161,6 @@
 
           <p id="formMessage" class="form-message" role="status"></p>
         </form>
-
-        <!-- PAYMENT PANEL (shown after successful submit) -->
-        <div id="paymentPanel" class="payment-panel hidden">
-          <h3 data-i18n="payment.title">תשלום</h3>
-          <p id="paymentInstructions" data-i18n="payment.instructions">ההזמנה נקלטה! להשלמת התשלום, לחצו על הכפתור המתאים לאמצעי התשלום שבחרתם:</p>
-          <div class="payment-buttons">
-            <a id="bitPayBtn" href="#" class="btn btn-outline payment-btn" data-i18n="payment.payWithBit">תשלום ב-Bit</a>
-            <a id="payboxPayBtn" href="#" class="btn btn-outline payment-btn" data-i18n="payment.payWithPaybox">תשלום ב-PayBox</a>
-          </div>
-          <p id="cashNote" class="payment-note hidden" data-i18n="payment.cashNote">תשלום במזומן יתבצע במעמד האיסוף.</p>
-          <p class="payment-note" data-i18n="payment.placeholderNote">
-            (קישורי התשלום יעודכנו בקרוב — בינתיים ניתן לשלם ידנית למספר 054-5623140)
-          </p>
-        </div>
 
       </div>
       <!-- /showcase-order -->
@@ -202,6 +178,17 @@
   <p class="footer-name">אביתר רייכמן</p>
   <p class="footer-phone"><a href="tel:0545623140">054-5623140</a></p>
 </footer>
+
+<!-- PAYMENT POPUP (shown after successful submit) -->
+<div id="paymentModal" class="modal-overlay hidden">
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <p>
+      <span data-i18n="payment.completeMessage">להשלמת ההזמנה נא להעביר תשלום לאביתר</span>
+      <a href="tel:0545623140" class="modal-phone">0545623140</a>
+    </p>
+    <button type="button" id="closePaymentModal" class="btn btn-gold" data-i18n="payment.close">סגירה</button>
+  </div>
+</div>
 
 <script src="translations.js"></script>
 <script src="script.js"></script>
