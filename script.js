@@ -242,6 +242,19 @@ function initOrderForm() {
   });
 }
 
+// ===== PRODUCT GALLERY =====
+function initProductGallery() {
+  const images = document.querySelectorAll('.product-gallery .gallery-img');
+  if (images.length < 2) return;
+
+  let activeIndex = 0;
+  setInterval(function () {
+    images[activeIndex].classList.remove('active');
+    activeIndex = (activeIndex + 1) % images.length;
+    images[activeIndex].classList.add('active');
+  }, 5000);
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function () {
   applyLanguage('he');
@@ -249,4 +262,5 @@ document.addEventListener('DOMContentLoaded', function () {
   initQuantitySteppers();
   initDistributorLogic();
   initOrderForm();
+  initProductGallery();
 });
