@@ -121,7 +121,9 @@ function validateOrderForm(formData) {
 
 const PICKUP_LOCATION_LABELS = {
   elazar: { he: 'אלעזר', en: 'Elazar' },
-  beersheva: { he: 'באר שבע', en: 'Beer Sheva' }
+  beersheva: { he: 'באר שבע', en: 'Beer Sheva' },
+  beitHabracha: { he: 'בית הברכה', en: 'Beit HaBracha' },
+  nofAyalon: { he: 'נוף אילון', en: 'Nof Ayalon' }
 };
 
 function buildDistributorText(distributorChoice, pickupLocation) {
