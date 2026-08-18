@@ -244,7 +244,7 @@ function initOrderForm() {
 
 // ===== PRODUCT GALLERY =====
 function initProductGallery() {
-  const images = document.querySelectorAll('.product-gallery .gallery-img');
+  const images = document.querySelectorAll('.header-gallery .gallery-img');
   if (images.length < 2) return;
 
   let activeIndex = 0;
