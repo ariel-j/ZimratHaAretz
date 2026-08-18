@@ -246,7 +246,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
   color: var(--color-text-muted);
   margin: 10px auto 26px;
-  max-width: 440px;
+  max-width: 560px;
 }
 
 .order-form {
