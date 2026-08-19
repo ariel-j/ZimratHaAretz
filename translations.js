@@ -37,6 +37,7 @@ const TRANSLATIONS = {
       'order.beersheva': 'באר שבע',
       'order.beitHabracha': 'בית הברכה',
       'order.nofAyalon': 'נוף אילון',
+      'order.RafaelBearSheva': 'רפאל שלוחת באר שבע'
       'order.paymentMethod': 'אמצעי תשלום',
       'order.cash': 'מזומן באיסוף',
       'order.prepay': 'תשלום מראש בפייבוקס / ביט',
