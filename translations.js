@@ -37,7 +37,7 @@ const TRANSLATIONS = {
       'order.beersheva': 'באר שבע',
       'order.beitHabracha': 'בית הברכה',
       'order.nofAyalon': 'נוף אילון',
-      'order.RafaelBearSheva': 'רפאל שלוחת באר שבע'
+      'order.RafaelBearSheva': 'רפאל שלוחת באר שבע',
       'order.paymentMethod': 'אמצעי תשלום',
       'order.cash': 'מזומן באיסוף',
       'order.prepay': 'תשלום מראש בפייבוקס / ביט',
@@ -97,6 +97,7 @@ const TRANSLATIONS = {
       'order.beersheva': 'Beer Sheva',
       'order.beitHabracha': 'Beit HaBracha',
       'order.nofAyalon': 'Nof Ayalon',
+      'order.RafaelBearSheva': 'Rafael Beer Sheva Branch',
       'order.paymentMethod': 'Payment Method',
       'order.cash': 'Cash on Pickup',
       'order.prepay': 'Prepay via Paybox / Bit',
