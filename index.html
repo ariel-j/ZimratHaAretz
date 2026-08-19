@@ -153,6 +153,15 @@
       </div>
 
       <div class="field">
+        <label for="paymentMethod" data-i18n="order.paymentMethod">אמצעי תשלום</label>
+        <select id="paymentMethod" name="paymentMethod" required>
+          <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
+          <option value="cash" data-i18n="order.cash">מזומן באיסוף</option>
+          <option value="prepay" data-i18n="order.prepay">תשלום מראש בפייבוקס / ביט</option>
+        </select>
+      </div>
+
+      <div class="field">
         <label for="notes" data-i18n="order.notes">הערות (לא חובה)</label>
         <textarea id="notes" name="notes" rows="3"></textarea>
       </div>
@@ -182,8 +191,11 @@
 <!-- PAYMENT POPUP (shown after successful submit) -->
 <div id="paymentModal" class="modal-overlay hidden">
   <div class="modal-box" role="dialog" aria-modal="true">
-    <p>
-      <span data-i18n="payment.completeMessage">להשלמת ההזמנה נא להעביר תשלום לאביתר</span>
+    <p id="paymentCashMessage" hidden>
+      <span data-i18n="payment.cashMessage">התשלום יתבצע במזומן במעמד האיסוף.</span>
+    </p>
+    <p id="paymentPrepayMessage" hidden>
+      <span data-i18n="payment.prepayMessage">להשלמת ההזמנה נא להעביר תשלום בפייבוקס או בביט לאביתר</span>
       <a href="tel:0545623140" class="modal-phone">0545623140</a>
     </p>
     <button type="button" id="closePaymentModal" class="btn btn-gold" data-i18n="payment.close">סגירה</button>

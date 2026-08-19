@@ -37,6 +37,9 @@ const TRANSLATIONS = {
       'order.beersheva': 'באר שבע',
       'order.beitHabracha': 'בית הברכה',
       'order.nofAyalon': 'נוף אילון',
+      'order.paymentMethod': 'אמצעי תשלום',
+      'order.cash': 'מזומן באיסוף',
+      'order.prepay': 'תשלום מראש בפייבוקס / ביט',
       'order.notes': 'הערות (לא חובה)',
       'order.submit': 'שליחת הזמנה',
       'order.sending': 'שולח...',
@@ -48,7 +51,9 @@ const TRANSLATIONS = {
       'order.errorProducts': 'נא לבחור לפחות מוצר אחד',
       'order.errorDistributor': 'נא לבחור אופן איסוף',
       'order.errorPickupLocation': 'נא לבחור מיקום איסוף',
-      'payment.completeMessage': 'להשלמת ההזמנה נא להעביר תשלום לאביתר',
+      'order.errorPaymentMethod': 'נא לבחור אמצעי תשלום',
+      'payment.cashMessage': 'התשלום יתבצע במזומן במעמד האיסוף.',
+      'payment.prepayMessage': 'להשלמת ההזמנה נא להעביר תשלום בפייבוקס או בביט לאביתר',
       'payment.close': 'סגירה',
       'footer.contactTitle': 'לפרטים והזמנות'
     }
@@ -91,6 +96,9 @@ const TRANSLATIONS = {
       'order.beersheva': 'Beer Sheva',
       'order.beitHabracha': 'Beit HaBracha',
       'order.nofAyalon': 'Nof Ayalon',
+      'order.paymentMethod': 'Payment Method',
+      'order.cash': 'Cash on Pickup',
+      'order.prepay': 'Prepay via Paybox / Bit',
       'order.notes': 'Notes (optional)',
       'order.submit': 'Submit Order',
       'order.sending': 'Sending...',
@@ -102,7 +110,9 @@ const TRANSLATIONS = {
       'order.errorProducts': 'Please choose at least one product',
       'order.errorDistributor': 'Please choose a pickup method',
       'order.errorPickupLocation': 'Please choose a pickup location',
-      'payment.completeMessage': 'To complete your order, please transfer payment to Eviatar',
+      'order.errorPaymentMethod': 'Please choose a payment method',
+      'payment.cashMessage': 'You will pay in cash when you pick up your order.',
+      'payment.prepayMessage': 'To complete your order, please transfer payment via Paybox or Bit to Eviatar',
       'payment.close': 'Close',
       'footer.contactTitle': 'For orders & details'
     }
