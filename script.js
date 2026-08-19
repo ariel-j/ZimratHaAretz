@@ -108,6 +108,9 @@ function validateOrderForm(formData) {
   if (formData.distributorChoice === 'collectionPoint' && !formData.pickupLocation) {
     return translate('order.errorPickupLocation');
   }
+  if (!formData.paymentMethod) {
+    return translate('order.errorPaymentMethod');
+  }
   return null;
 }
 
@@ -128,6 +131,10 @@ function buildDistributorText(distributorChoice, pickupLocation) {
   return translate('order.collectionPoint') + ' - ' + locationLabel;
 }
 
+function buildPaymentMethodText(paymentMethod) {
+  return translate(paymentMethod === 'cash' ? 'order.cash' : 'order.prepay');
+}
+
 // ===== FORM SUBMISSION =====
 function collectFormData() {
   return {
@@ -139,6 +146,7 @@ function collectFormData() {
     qty350g: parseInt(document.getElementById('qty350g').value, 10) || 0,
     distributorChoice: document.getElementById('distributor').value,
     pickupLocation: document.getElementById('pickupLocation').value,
+    paymentMethod: document.getElementById('paymentMethod').value,
     notes: document.getElementById('notes').value.trim()
   };
 }
@@ -149,7 +157,9 @@ function showFormMessage(text, type) {
   messageEl.className = 'form-message ' + type;
 }
 
-function showPaymentPopup() {
+function showPaymentPopup(paymentMethod) {
+  document.getElementById('paymentCashMessage').hidden = paymentMethod !== 'cash';
+  document.getElementById('paymentPrepayMessage').hidden = paymentMethod !== 'prepay';
   document.getElementById('paymentModal').classList.remove('hidden');
 }
 
@@ -176,6 +186,7 @@ async function submitOrder(formData) {
     qty500g: formData.qty500g,
     qty350g: formData.qty350g,
     distributor: buildDistributorText(formData.distributorChoice, formData.pickupLocation),
+    paymentMethod: buildPaymentMethodText(formData.paymentMethod),
     notes: formData.notes
   };
 
@@ -213,7 +224,7 @@ function initOrderForm() {
 
       if (result.success) {
         showFormMessage(translate('order.success'), 'success');
-        showPaymentPopup();
+        showPaymentPopup(formData.paymentMethod);
         form.reset();
         updateTotalPrice();
         document.getElementById('pickupLocationField').hidden = true;
