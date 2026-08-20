@@ -1,5 +1,5 @@
 // ===== CONFIG =====
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzr6AGn4g936I1iND97vvocOFvtvZqITLurAjRHLOU8j_Mxv7vY6jK9iFmqKMRlZOSS/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby3qZ2Bp6ol1XLWazuQ9kjh9SlgpnjY9fHt76EU6n8GzYA3RR_MI34Je4Ra_vSwRUlx/exec';
 
 const PRICES = { qty1kg: 65, qty500g: 35, qty350g: 25 };
 
