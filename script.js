@@ -118,7 +118,10 @@ const PICKUP_LOCATION_LABELS = {
   elazar: { he: 'אלעזר', en: 'Elazar' },
   beersheva: { he: 'באר שבע', en: 'Beer Sheva' },
   beitHabracha: { he: 'בית הברכה', en: 'Beit HaBracha' },
-  nofAyalon: { he: 'נוף אילון', en: 'Nof Ayalon' }
+  nofAyalon: { he: 'נוף אילון', en: 'Nof Ayalon' },
+  RafaelBearSheva: { he: 'רפאל שלוחת באר שבע', en: 'Rafael Beer Sheva Branch' },
+  mobileyeJerusalem: { he: 'מובילאיי ירושלים', en: 'Mobileye Jerusalem' },
+  clarotyTLV: { he: 'קלארוטי תל אביב (טאיר צורי)', en: 'Claroty Tel Aviv (Tair Zori)' }
 };
 
 function buildDistributorText(distributorChoice, pickupLocation) {
