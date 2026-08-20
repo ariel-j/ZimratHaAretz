@@ -34,23 +34,6 @@ function initLanguageToggle() {
   });
 }
 
-// ===== DISTRIBUTOR / PICKUP LOCATION =====
-function initDistributorLogic() {
-  const distributorSelect = document.getElementById('distributor');
-  const pickupLocationField = document.getElementById('pickupLocationField');
-  const pickupLocationSelect = document.getElementById('pickupLocation');
-
-  distributorSelect.addEventListener('change', function () {
-    const isCollectionPoint = distributorSelect.value === 'collectionPoint';
-
-    pickupLocationField.hidden = !isCollectionPoint;
-    pickupLocationSelect.required = isCollectionPoint;
-    if (!isCollectionPoint) {
-      pickupLocationSelect.value = '';
-    }
-  });
-}
-
 // ===== QUANTITY STEPPERS =====
 function initQuantitySteppers() {
   document.querySelectorAll('.qty-btn').forEach(function (button) {
@@ -102,10 +85,7 @@ function validateOrderForm(formData) {
   if (formData.qty1kg + formData.qty500g + formData.qty350g === 0) {
     return translate('order.errorProducts');
   }
-  if (!formData.distributorChoice) {
-    return translate('order.errorDistributor');
-  }
-  if (formData.distributorChoice === 'collectionPoint' && !formData.pickupLocation) {
+  if (!formData.pickupLocation) {
     return translate('order.errorPickupLocation');
   }
   if (!formData.paymentMethod) {
@@ -126,14 +106,10 @@ const PICKUP_LOCATION_LABELS = {
   maaleHever: { he: 'מעלה חבר', en: "Ma'ale Hever" }
 };
 
-function buildDistributorText(distributorChoice, pickupLocation) {
-  if (distributorChoice !== 'collectionPoint') {
-    return translate('order.pickup');
-  }
-  const locationLabel = PICKUP_LOCATION_LABELS[pickupLocation]
+function buildPickupLocationText(pickupLocation) {
+  return PICKUP_LOCATION_LABELS[pickupLocation]
     ? PICKUP_LOCATION_LABELS[pickupLocation][currentLang]
     : pickupLocation;
-  return translate('order.collectionPoint') + ' - ' + locationLabel;
 }
 
 function buildPaymentMethodText(paymentMethod) {
@@ -149,7 +125,6 @@ function collectFormData() {
     qty1kg: parseInt(document.getElementById('qty1kg').value, 10) || 0,
     qty500g: parseInt(document.getElementById('qty500g').value, 10) || 0,
     qty350g: parseInt(document.getElementById('qty350g').value, 10) || 0,
-    distributorChoice: document.getElementById('distributor').value,
     pickupLocation: document.getElementById('pickupLocation').value,
     paymentMethod: document.getElementById('paymentMethod').value,
     notes: document.getElementById('notes').value.trim()
@@ -190,7 +165,7 @@ async function submitOrder(formData) {
     qty1kg: formData.qty1kg,
     qty500g: formData.qty500g,
     qty350g: formData.qty350g,
-    distributor: buildDistributorText(formData.distributorChoice, formData.pickupLocation),
+    pickupLocation: buildPickupLocationText(formData.pickupLocation),
     paymentMethod: buildPaymentMethodText(formData.paymentMethod),
     notes: formData.notes
   };
@@ -232,7 +207,6 @@ function initOrderForm() {
         showPaymentPopup(formData.paymentMethod);
         form.reset();
         updateTotalPrice();
-        document.getElementById('pickupLocationField').hidden = true;
       } else {
         showFormMessage(result.error || translate('order.error'), 'error');
       }
@@ -263,7 +237,6 @@ document.addEventListener('DOMContentLoaded', function () {
   applyLanguage('he');
   initLanguageToggle();
   initQuantitySteppers();
-  initDistributorLogic();
   initOrderForm();
   initPaymentPopup();
   initProductGallery();

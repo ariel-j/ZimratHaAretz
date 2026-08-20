@@ -62,6 +62,21 @@
 
       <div class="showcase-media">
         <img src="assets/flyer-web.jpg" alt="זמרת הארץ - פלייר דבש טבעי" class="flyer-image">
+
+        <aside class="stores-card">
+          <h3 data-i18n="stores.title">אפשר גם לקנות ישירות בנקודות הבאות</h3>
+          <p class="stores-intro" data-i18n="stores.intro">בלי למלא טופס הזמנה — פשוט תגיעו לאחת מהנקודות:</p>
+          <ul class="stores-list">
+            <li data-i18n="order.elazar">אלעזר</li>
+            <li data-i18n="order.beersheva">באר שבע</li>
+            <li data-i18n="order.beitHabracha">בית הברכה</li>
+            <li data-i18n="order.nofAyalon">נוף אילון</li>
+            <li data-i18n="order.RafaelBearSheva">שלוחת רפאל באר שבע</li>
+            <li data-i18n="order.mobileyeJerusalem">מובילאיי ירושלים</li>
+            <li data-i18n="order.rafaelJerusalem">רפאל ירושלים</li>
+            <li data-i18n="order.maaleHever">מעלה חבר</li>
+          </ul>
+        </aside>
       </div>
 
       <div class="showcase-order" id="order">
@@ -130,29 +145,19 @@
         <span id="totalPrice">₪0</span>
       </div>
 
-      <div class="form-grid">
-        <div class="field">
-          <label for="distributor" data-i18n="order.distributor">שיטת איסוף</label>
-          <select id="distributor" name="distributor" required>
-            <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
-            <option value="pickup" data-i18n="order.pickup">איסוף עצמי מנוף איילון</option>
-            <option value="collectionPoint" data-i18n="order.collectionPoint">נקודת איסוף</option>
-          </select>
-        </div>
-        <div class="field" id="pickupLocationField" hidden>
-          <label for="pickupLocation" data-i18n="order.pickupLocation">מיקום איסוף</label>
-          <select id="pickupLocation" name="pickupLocation">
-            <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
-            <option value="elazar" data-i18n="order.elazar">אלעזר</option>
-            <option value="beersheva" data-i18n="order.beersheva">באר שבע</option>
-            <option value="beitHabracha" data-i18n="order.beitHabracha">בית הברכה</option>
-            <option value="nofAyalon" data-i18n="order.nofAyalon">נוף אילון</option>
-            <option value="RafaelBearSheva" data-i18n="order.RafaelBearSheva">שלוחת רפאל באר שבע</option>
-            <option value="mobileyeJerusalem" data-i18n="order.mobileyeJerusalem">מובילאיי ירושלים</option>
-            <option value="rafaelJerusalem" data-i18n="order.rafaelJerusalem">רפאל ירושלים</option>
-            <option value="maaleHever" data-i18n="order.maaleHever">מעלה חבר</option>
-          </select>
-        </div>
+      <div class="field" id="pickupLocationField">
+        <label for="pickupLocation" data-i18n="order.pickupLocation">מיקום איסוף</label>
+        <select id="pickupLocation" name="pickupLocation" required>
+          <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
+          <option value="elazar" data-i18n="order.elazar">אלעזר</option>
+          <option value="beersheva" data-i18n="order.beersheva">באר שבע</option>
+          <option value="beitHabracha" data-i18n="order.beitHabracha">בית הברכה</option>
+          <option value="nofAyalon" data-i18n="order.nofAyalon">נוף אילון</option>
+          <option value="RafaelBearSheva" data-i18n="order.RafaelBearSheva">שלוחת רפאל באר שבע</option>
+          <option value="mobileyeJerusalem" data-i18n="order.mobileyeJerusalem">מובילאיי ירושלים</option>
+          <option value="rafaelJerusalem" data-i18n="order.rafaelJerusalem">רפאל ירושלים</option>
+          <option value="maaleHever" data-i18n="order.maaleHever">מעלה חבר</option>
+        </select>
       </div>
 
       <div class="field">

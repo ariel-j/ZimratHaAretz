@@ -212,6 +212,41 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
+.stores-card {
+  margin-top: 24px;
+  background: var(--color-bg-alt);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  border-radius: 16px;
+  padding: 20px 24px;
+  text-align: start;
+}
+.stores-card h3 {
+  font-size: 1.05rem;
+  color: var(--color-cream);
+  margin-bottom: 6px;
+}
+.stores-intro {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 12px;
+}
+.stores-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stores-list li {
+  padding: 8px 12px;
+  background: var(--color-bg);
+  border: 1px solid rgba(201, 162, 39, 0.15);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  color: var(--color-text-light);
+}
+
 .header-gallery {
   position: relative;
   width: 34px;
