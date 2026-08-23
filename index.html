@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=3">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
 </head>
 <body>
 
@@ -135,17 +136,6 @@
           <label for="pickupLocation" data-i18n="order.pickupLocation">מיקום איסוף</label>
           <select id="pickupLocation" name="pickupLocation" required>
             <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
-            <option value="elazar" data-i18n="order.elazar">אלעזר</option>
-            <option value="beersheva" data-i18n="order.beersheva">באר שבע</option>
-            <option value="beitHabracha" data-i18n="order.beitHabracha">בית הברכה (שרה חיימוב, גוש עציון)</option>
-            <option value="nofAyalon" data-i18n="order.nofAyalon">נוף אילון</option>
-            <option value="RafaelBearSheva" data-i18n="order.RafaelBearSheva">שלוחת רפאל באר שבע</option>
-            <option value="mobileyeJerusalem" data-i18n="order.mobileyeJerusalem">מובילאיי ירושלים</option>
-            <option value="rafaelJerusalem" data-i18n="order.rafaelJerusalem">רפאל ירושלים</option>
-            <option value="maaleHever" data-i18n="order.maaleHever">מעלה חבר (משפחת לוי)</option>
-            <option value="raanana" data-i18n="order.raanana">רעננה (אלתרמן 8)</option>
-            <option value="alonShvut" data-i18n="order.alonShvut">אלון שבות (דוד אורן)</option>
-            <option value="harBracha" data-i18n="order.harBracha">הר ברכה (רבקה דסאלי)</option>
           </select>
         </div>
       </div>
@@ -165,6 +155,23 @@
 
     </div>
     <!-- /showcase-grid -->
+  </section>
+
+  <!-- SELL POINTS MAP -->
+  <section id="sellPoints" class="sellpoints">
+    <div class="sellpoints-inner">
+      <h2 data-i18n="sellpoints.title">נקודות מכירה</h2>
+      <p class="sellpoints-intro" data-i18n="sellpoints.intro">כל נקודות המכירה שלנו על מפה אחת — אתרו את הקרובה אליכם.</p>
+
+      <div class="sellpoints-controls">
+        <button type="button" id="findNearMeBtn" class="btn btn-outline btn-small" data-i18n="sellpoints.findMe">מצאו את הנקודה הקרובה אליי</button>
+        <p id="sellpointsStatus" class="sellpoints-status" role="status"></p>
+      </div>
+
+      <div id="sellPointsMap" class="sellpoints-map" role="img" aria-label="מפת נקודות מכירה"></div>
+
+      <ul id="sellPointsList" class="sellpoints-list"></ul>
+    </div>
   </section>
 
 </main>
@@ -188,7 +195,9 @@
   </div>
 </div>
 
-<script src="translations.js?v=4"></script>
-<script src="script.js?v=4"></script>
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="translations.js?v=5"></script>
+<script src="sellPoints.js?v=1"></script>
+<script src="script.js?v=5"></script>
 </body>
 </html>
