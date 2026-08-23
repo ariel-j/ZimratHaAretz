@@ -34,23 +34,6 @@ function initLanguageToggle() {
   });
 }
 
-// ===== DISTRIBUTOR / PICKUP LOCATION =====
-function initDistributorLogic() {
-  const distributorSelect = document.getElementById('distributor');
-  const pickupLocationField = document.getElementById('pickupLocationField');
-  const pickupLocationSelect = document.getElementById('pickupLocation');
-
-  distributorSelect.addEventListener('change', function () {
-    const isCollectionPoint = distributorSelect.value === 'collectionPoint';
-
-    pickupLocationField.hidden = !isCollectionPoint;
-    pickupLocationSelect.required = isCollectionPoint;
-    if (!isCollectionPoint) {
-      pickupLocationSelect.value = '';
-    }
-  });
-}
-
 // ===== QUANTITY STEPPERS =====
 function initQuantitySteppers() {
   document.querySelectorAll('.qty-btn').forEach(function (button) {
@@ -102,14 +85,8 @@ function validateOrderForm(formData) {
   if (formData.qty1kg + formData.qty500g + formData.qty350g === 0) {
     return translate('order.errorProducts');
   }
-  if (!formData.distributorChoice) {
-    return translate('order.errorDistributor');
-  }
-  if (formData.distributorChoice === 'collectionPoint' && !formData.pickupLocation) {
+  if (!formData.pickupLocation) {
     return translate('order.errorPickupLocation');
-  }
-  if (!formData.paymentMethod) {
-    return translate('order.errorPaymentMethod');
   }
   return null;
 }
@@ -117,27 +94,23 @@ function validateOrderForm(formData) {
 const PICKUP_LOCATION_LABELS = {
   elazar: { he: 'אלעזר', en: 'Elazar' },
   beersheva: { he: 'באר שבע', en: 'Beer Sheva' },
-  beitHabracha: { he: 'בית הברכה', en: 'Beit HaBracha' },
+  beitHabracha: { he: 'בית הברכה (שרה חיימוב, גוש עציון)', en: 'Beit HaBracha (Sara Chaimov, Gush Etzion)' },
   nofAyalon: { he: 'נוף אילון', en: 'Nof Ayalon' },
   RafaelBearSheva: { he: 'רפאל שלוחת באר שבע', en: 'Rafael Beer Sheva Branch' },
   mobileyeJerusalem: { he: 'מובילאיי ירושלים', en: 'Mobileye Jerusalem' },
   clarotyTLV: { he: 'קלארוטי תל אביב (טאיר צורי)', en: 'Claroty Tel Aviv (Tair Zori)' },
   rafaelJerusalem: { he: 'רפאל ירושלים', en: 'Rafael Jerusalem' },
-  maaleHever: { he: 'מעלה חבר', en: "Ma'ale Hever" }
+  maaleHever: { he: 'מעלה חבר (משפחת לוי)', en: "Ma'ale Hever (Levi Family)" },
+  raanana: { he: 'רעננה (אלתרמן 8)', en: 'Raanana (Alterman 8)' },
+  alonShvut: { he: 'אלון שבות (דוד אורן)', en: 'Alon Shvut (David Oren)' },
+  harBracha: { he: 'הר ברכה (רבקה דסאלי)', en: 'Har Bracha (Rivka Dasali)' }
 };
 
-function buildDistributorText(distributorChoice, pickupLocation) {
-  if (distributorChoice !== 'collectionPoint') {
-    return translate('order.pickup');
-  }
+function buildDistributorText(pickupLocation) {
   const locationLabel = PICKUP_LOCATION_LABELS[pickupLocation]
     ? PICKUP_LOCATION_LABELS[pickupLocation][currentLang]
     : pickupLocation;
   return translate('order.collectionPoint') + ' - ' + locationLabel;
-}
-
-function buildPaymentMethodText(paymentMethod) {
-  return translate(paymentMethod === 'cash' ? 'order.cash' : 'order.prepay');
 }
 
 // ===== FORM SUBMISSION =====
@@ -149,9 +122,7 @@ function collectFormData() {
     qty1kg: parseInt(document.getElementById('qty1kg').value, 10) || 0,
     qty500g: parseInt(document.getElementById('qty500g').value, 10) || 0,
     qty350g: parseInt(document.getElementById('qty350g').value, 10) || 0,
-    distributorChoice: document.getElementById('distributor').value,
     pickupLocation: document.getElementById('pickupLocation').value,
-    paymentMethod: document.getElementById('paymentMethod').value,
     notes: document.getElementById('notes').value.trim()
   };
 }
@@ -162,9 +133,7 @@ function showFormMessage(text, type) {
   messageEl.className = 'form-message ' + type;
 }
 
-function showPaymentPopup(paymentMethod) {
-  document.getElementById('paymentCashMessage').hidden = paymentMethod !== 'cash';
-  document.getElementById('paymentPrepayMessage').hidden = paymentMethod !== 'prepay';
+function showPaymentPopup() {
   document.getElementById('paymentModal').classList.remove('hidden');
 }
 
@@ -190,8 +159,8 @@ async function submitOrder(formData) {
     qty1kg: formData.qty1kg,
     qty500g: formData.qty500g,
     qty350g: formData.qty350g,
-    distributor: buildDistributorText(formData.distributorChoice, formData.pickupLocation),
-    paymentMethod: buildPaymentMethodText(formData.paymentMethod),
+    distributor: buildDistributorText(formData.pickupLocation),
+    paymentMethod: translate('order.prepay'),
     notes: formData.notes
   };
 
@@ -229,10 +198,9 @@ function initOrderForm() {
 
       if (result.success) {
         showFormMessage(translate('order.success'), 'success');
-        showPaymentPopup(formData.paymentMethod);
+        showPaymentPopup();
         form.reset();
         updateTotalPrice();
-        document.getElementById('pickupLocationField').hidden = true;
       } else {
         showFormMessage(result.error || translate('order.error'), 'error');
       }
@@ -263,7 +231,6 @@ document.addEventListener('DOMContentLoaded', function () {
   applyLanguage('he');
   initLanguageToggle();
   initQuantitySteppers();
-  initDistributorLogic();
   initOrderForm();
   initPaymentPopup();
   initProductGallery();

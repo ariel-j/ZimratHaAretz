@@ -66,7 +66,7 @@
 
       <div class="showcase-order" id="order">
         <h2 data-i18n="order.title">הזמנה</h2>
-        <p class="order-intro" data-i18n="order.intro">מלאו את הפרטים, בחרו כמות ואמצעי תשלום — ונחזור אליכם לאישור ההזמנה.</p>
+        <p class="order-intro" data-i18n="order.intro">מלאו את הפרטים ובחרו כמות — ונחזור אליכם לאישור ההזמנה.</p>
 
         <form id="orderForm" class="order-form" novalidate>
 
@@ -131,37 +131,23 @@
       </div>
 
       <div class="form-grid">
-        <div class="field">
-          <label for="distributor" data-i18n="order.distributor">שיטת איסוף</label>
-          <select id="distributor" name="distributor" required>
-            <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
-            <option value="pickup" data-i18n="order.pickup">איסוף עצמי מנוף איילון</option>
-            <option value="collectionPoint" data-i18n="order.collectionPoint">נקודת איסוף</option>
-          </select>
-        </div>
-        <div class="field" id="pickupLocationField" hidden>
+        <div class="field" id="pickupLocationField">
           <label for="pickupLocation" data-i18n="order.pickupLocation">מיקום איסוף</label>
-          <select id="pickupLocation" name="pickupLocation">
+          <select id="pickupLocation" name="pickupLocation" required>
             <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
             <option value="elazar" data-i18n="order.elazar">אלעזר</option>
             <option value="beersheva" data-i18n="order.beersheva">באר שבע</option>
-            <option value="beitHabracha" data-i18n="order.beitHabracha">בית הברכה</option>
+            <option value="beitHabracha" data-i18n="order.beitHabracha">בית הברכה (שרה חיימוב, גוש עציון)</option>
             <option value="nofAyalon" data-i18n="order.nofAyalon">נוף אילון</option>
             <option value="RafaelBearSheva" data-i18n="order.RafaelBearSheva">שלוחת רפאל באר שבע</option>
             <option value="mobileyeJerusalem" data-i18n="order.mobileyeJerusalem">מובילאיי ירושלים</option>
             <option value="rafaelJerusalem" data-i18n="order.rafaelJerusalem">רפאל ירושלים</option>
-            <option value="maaleHever" data-i18n="order.maaleHever">מעלה חבר</option>
+            <option value="maaleHever" data-i18n="order.maaleHever">מעלה חבר (משפחת לוי)</option>
+            <option value="raanana" data-i18n="order.raanana">רעננה (אלתרמן 8)</option>
+            <option value="alonShvut" data-i18n="order.alonShvut">אלון שבות (דוד אורן)</option>
+            <option value="harBracha" data-i18n="order.harBracha">הר ברכה (רבקה דסאלי)</option>
           </select>
         </div>
-      </div>
-
-      <div class="field">
-        <label for="paymentMethod" data-i18n="order.paymentMethod">אמצעי תשלום</label>
-        <select id="paymentMethod" name="paymentMethod" required>
-          <option value="" data-i18n="order.selectOption">בחרו אפשרות</option>
-          <option value="cash" data-i18n="order.cash">מזומן באיסוף</option>
-          <option value="prepay" data-i18n="order.prepay">תשלום מראש בפייבוקס / ביט</option>
-        </select>
       </div>
 
       <div class="field">
@@ -194,10 +180,7 @@
 <!-- PAYMENT POPUP (shown after successful submit) -->
 <div id="paymentModal" class="modal-overlay hidden">
   <div class="modal-box" role="dialog" aria-modal="true">
-    <p id="paymentCashMessage" hidden>
-      <span data-i18n="payment.cashMessage">התשלום יתבצע במזומן במעמד האיסוף.</span>
-    </p>
-    <p id="paymentPrepayMessage" hidden>
+    <p id="paymentPrepayMessage">
       <span data-i18n="payment.prepayMessage">להשלמת ההזמנה נא להעביר תשלום בפייבוקס או בביט לאביתר</span>
       <a href="tel:0545623140" class="modal-phone">0545623140</a>
     </p>
@@ -205,7 +188,7 @@
   </div>
 </div>
 
-<script src="translations.js?v=3"></script>
-<script src="script.js?v=3"></script>
+<script src="translations.js?v=4"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>
