@@ -21,6 +21,10 @@ function applyLanguage(langCode) {
 
   document.getElementById('langToggle').textContent = dict.toggleLabel;
   currentLang = langCode;
+
+  renderPickupOptions(langCode);
+  updateSellPointsLanguage(langCode);
+  renderSellPointsList();
 }
 
 function translate(key) {
@@ -91,26 +95,35 @@ function validateOrderForm(formData) {
   return null;
 }
 
-const PICKUP_LOCATION_LABELS = {
-  elazar: { he: 'אלעזר', en: 'Elazar' },
-  beersheva: { he: 'באר שבע', en: 'Beer Sheva' },
-  beitHabracha: { he: 'בית הברכה (שרה חיימוב, גוש עציון)', en: 'Beit HaBracha (Sara Chaimov, Gush Etzion)' },
-  nofAyalon: { he: 'נוף אילון', en: 'Nof Ayalon' },
-  RafaelBearSheva: { he: 'רפאל שלוחת באר שבע', en: 'Rafael Beer Sheva Branch' },
-  mobileyeJerusalem: { he: 'מובילאיי ירושלים', en: 'Mobileye Jerusalem' },
-  clarotyTLV: { he: 'קלארוטי תל אביב (טאיר צורי)', en: 'Claroty Tel Aviv (Tair Zori)' },
-  rafaelJerusalem: { he: 'רפאל ירושלים', en: 'Rafael Jerusalem' },
-  maaleHever: { he: 'מעלה חבר (משפחת לוי)', en: "Ma'ale Hever (Levi Family)" },
-  raanana: { he: 'רעננה (אלתרמן 8)', en: 'Raanana (Alterman 8)' },
-  alonShvut: { he: 'אלון שבות (דוד אורן)', en: 'Alon Shvut (David Oren)' },
-  harBracha: { he: 'הר ברכה (רבקה דסאלי)', en: 'Har Bracha (Rivka Dasali)' }
-};
+function getSellPointLabel(sellPointId, langCode) {
+  const point = SELL_POINTS.find(function (p) { return p.id === sellPointId; });
+  return point ? point[langCode] : sellPointId;
+}
 
 function buildDistributorText(pickupLocation) {
-  const locationLabel = PICKUP_LOCATION_LABELS[pickupLocation]
-    ? PICKUP_LOCATION_LABELS[pickupLocation][currentLang]
-    : pickupLocation;
-  return translate('order.collectionPoint') + ' - ' + locationLabel;
+  return translate('order.collectionPoint') + ' - ' + getSellPointLabel(pickupLocation, currentLang);
+}
+
+// ===== PICKUP DROPDOWN (rendered from SELL_POINTS) =====
+function renderPickupOptions(langCode) {
+  const select = document.getElementById('pickupLocation');
+  const previousValue = select.value;
+
+  select.querySelectorAll('option[data-sell-point]').forEach(function (option) {
+    option.remove();
+  });
+
+  SELL_POINTS.forEach(function (point) {
+    const option = document.createElement('option');
+    option.value = point.id;
+    option.textContent = point[langCode];
+    option.setAttribute('data-sell-point', '');
+    select.appendChild(option);
+  });
+
+  if (SELL_POINTS.some(function (p) { return p.id === previousValue; })) {
+    select.value = previousValue;
+  }
 }
 
 // ===== FORM SUBMISSION =====
@@ -226,8 +239,207 @@ function initProductGallery() {
   }, 5000);
 }
 
+// ===== SELL POINTS MAP =====
+const sellPointsState = {
+  map: null,
+  markers: {},
+  userLocation: null,
+  distancesById: {}
+};
+
+function haversineDistanceKm(lat1, lng1, lat2, lng2) {
+  const earthRadiusKm = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function setSellPointsStatus(text) {
+  document.getElementById('sellpointsStatus').textContent = text;
+}
+
+function nearestSellPointId() {
+  if (!sellPointsState.userLocation) return null;
+  let nearestId = null;
+  let nearestDistance = Infinity;
+  Object.keys(sellPointsState.distancesById).forEach(function (id) {
+    if (sellPointsState.distancesById[id] < nearestDistance) {
+      nearestDistance = sellPointsState.distancesById[id];
+      nearestId = id;
+    }
+  });
+  return nearestId;
+}
+
+function updateSellPointsLanguage(langCode) {
+  Object.keys(sellPointsState.markers).forEach(function (id) {
+    const point = SELL_POINTS.find(function (p) { return p.id === id; });
+    if (point) sellPointsState.markers[id].setPopupContent(point[langCode]);
+  });
+  if (sellPointsState.userMarker) {
+    sellPointsState.userMarker.setPopupContent(translate('sellpoints.you'));
+  }
+}
+
+function renderSellPointsList() {
+  const list = document.getElementById('sellPointsList');
+  if (!list) return;
+  list.innerHTML = '';
+
+  if (SELL_POINTS.length === 0) {
+    const emptyItem = document.createElement('li');
+    emptyItem.className = 'sellpoint-empty';
+    emptyItem.textContent = translate('sellpoints.empty');
+    list.appendChild(emptyItem);
+    return;
+  }
+
+  const hasDistances = !!sellPointsState.userLocation;
+  const nearestId = hasDistances ? nearestSellPointId() : null;
+
+  const points = SELL_POINTS.slice().sort(function (a, b) {
+    if (!hasDistances) return 0;
+    return sellPointsState.distancesById[a.id] - sellPointsState.distancesById[b.id];
+  });
+
+  points.forEach(function (point) {
+    const item = document.createElement('li');
+    item.className = 'sellpoint-item' + (point.id === nearestId ? ' nearest' : '');
+
+    const name = document.createElement('span');
+    name.className = 'sellpoint-name';
+    name.textContent = point[currentLang];
+    item.appendChild(name);
+
+    if (hasDistances) {
+      const distance = document.createElement('span');
+      distance.className = 'sellpoint-distance';
+      const distanceText = translate('sellpoints.distanceAway')
+        .replace('{distance}', sellPointsState.distancesById[point.id].toFixed(1));
+      distance.textContent = point.id === nearestId
+        ? translate('sellpoints.nearest') + ' · ' + distanceText
+        : distanceText;
+      item.appendChild(distance);
+    }
+
+    item.addEventListener('click', function () {
+      if (sellPointsState.map && sellPointsState.markers[point.id]) {
+        sellPointsState.map.setView([point.lat, point.lng], 12);
+        sellPointsState.markers[point.id].openPopup();
+      }
+    });
+
+    list.appendChild(item);
+  });
+}
+
+function updateUserLocationOnMap() {
+  if (!sellPointsState.map || !sellPointsState.userLocation) return;
+
+  const { lat, lng } = sellPointsState.userLocation;
+
+  if (sellPointsState.userMarker) {
+    sellPointsState.userMarker.setLatLng([lat, lng]);
+  } else {
+    sellPointsState.userMarker = L.circleMarker([lat, lng], {
+      radius: 8,
+      color: '#E0BC4B',
+      fillColor: '#E0BC4B',
+      fillOpacity: 0.9
+    }).addTo(sellPointsState.map).bindPopup(translate('sellpoints.you'));
+  }
+
+  const bounds = L.latLngBounds(SELL_POINTS.map(function (p) { return [p.lat, p.lng]; }));
+  bounds.extend([lat, lng]);
+  sellPointsState.map.fitBounds(bounds, { padding: [30, 30] });
+}
+
+function handleGeolocationSuccess(position) {
+  sellPointsState.userLocation = {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude
+  };
+
+  sellPointsState.distancesById = {};
+  SELL_POINTS.forEach(function (point) {
+    sellPointsState.distancesById[point.id] = haversineDistanceKm(
+      sellPointsState.userLocation.lat, sellPointsState.userLocation.lng,
+      point.lat, point.lng
+    );
+  });
+
+  setSellPointsStatus('');
+  updateUserLocationOnMap();
+  renderSellPointsList();
+  resetFindMeButton();
+}
+
+function handleGeolocationError(error) {
+  const message = error.code === error.PERMISSION_DENIED
+    ? translate('sellpoints.geoDenied')
+    : translate('sellpoints.geoError');
+  setSellPointsStatus(message);
+  resetFindMeButton();
+}
+
+function resetFindMeButton() {
+  const button = document.getElementById('findNearMeBtn');
+  button.disabled = false;
+  button.textContent = translate('sellpoints.findMe');
+}
+
+function initFindNearMeButton() {
+  const button = document.getElementById('findNearMeBtn');
+
+  if (!('geolocation' in navigator)) {
+    button.disabled = true;
+    setSellPointsStatus(translate('sellpoints.geoUnsupported'));
+    return;
+  }
+
+  button.addEventListener('click', function () {
+    button.disabled = true;
+    button.textContent = translate('sellpoints.locating');
+    setSellPointsStatus('');
+    navigator.geolocation.getCurrentPosition(handleGeolocationSuccess, handleGeolocationError, {
+      enableHighAccuracy: true,
+      timeout: 10000
+    });
+  });
+}
+
+function initSellPointsMap() {
+  const mapContainer = document.getElementById('sellPointsMap');
+  if (!mapContainer || typeof L === 'undefined' || SELL_POINTS.length === 0) return;
+
+  const map = L.map(mapContainer, { scrollWheelZoom: false });
+  sellPointsState.map = map;
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 18
+  }).addTo(map);
+
+  SELL_POINTS.forEach(function (point) {
+    const marker = L.marker([point.lat, point.lng])
+      .addTo(map)
+      .bindPopup(point[currentLang]);
+    sellPointsState.markers[point.id] = marker;
+  });
+
+  const bounds = L.latLngBounds(SELL_POINTS.map(function (p) { return [p.lat, p.lng]; }));
+  map.fitBounds(bounds, { padding: [30, 30] });
+
+  initFindNearMeButton();
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function () {
+  initSellPointsMap();
   applyLanguage('he');
   initLanguageToggle();
   initQuantitySteppers();
