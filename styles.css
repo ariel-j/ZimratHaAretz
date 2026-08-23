@@ -74,19 +74,29 @@ img { max-width: 100%; display: block; }
 
 .header-actions { display: flex; align-items: center; gap: 10px; }
 
-.lang-toggle {
-  background: transparent;
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   border: 1px solid var(--color-gold);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.lang-option {
+  background: transparent;
+  border: none;
   color: var(--color-gold-bright);
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.85rem;
-  padding: 6px 12px;
+  font-size: 0.8rem;
+  padding: 5px 10px;
   border-radius: 999px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
-.lang-toggle:hover { background: var(--color-gold); color: var(--color-text-dark); }
+.lang-option:hover { background: rgba(212, 175, 55, 0.25); }
+.lang-option.active { background: var(--color-gold); color: var(--color-text-dark); }
 
 /* ===== SUPPORT BANNER (inside header) ===== */
 .support-banner {

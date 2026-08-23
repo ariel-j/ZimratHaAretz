@@ -19,8 +19,11 @@ function applyLanguage(langCode) {
     }
   });
 
-  document.getElementById('langToggle').textContent = dict.toggleLabel;
   currentLang = langCode;
+
+  document.querySelectorAll('#langSwitcher .lang-option').forEach(function (button) {
+    button.classList.toggle('active', button.getAttribute('data-lang') === langCode);
+  });
 
   renderPickupOptions(langCode);
   updateSellPointsLanguage(langCode);
@@ -32,9 +35,10 @@ function translate(key) {
 }
 
 function initLanguageToggle() {
-  const toggleButton = document.getElementById('langToggle');
-  toggleButton.addEventListener('click', function () {
-    applyLanguage(currentLang === 'he' ? 'en' : 'he');
+  document.querySelectorAll('#langSwitcher .lang-option').forEach(function (button) {
+    button.addEventListener('click', function () {
+      applyLanguage(button.getAttribute('data-lang'));
+    });
   });
 }
 
