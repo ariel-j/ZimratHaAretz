@@ -43,18 +43,7 @@ const TRANSLATIONS = {
       'order.errorPickupLocation': 'נא לבחור מיקום איסוף',
       'payment.prepayMessage': 'להשלמת ההזמנה נא להעביר תשלום בפייבוקס או בביט לאביתר',
       'payment.close': 'סגירה',
-      'footer.contactTitle': 'לפרטים והזמנות',
-      'sellpoints.title': 'נקודות מכירה',
-      'sellpoints.intro': 'כל נקודות המכירה שלנו על מפה אחת — אתרו את הקרובה אליכם.',
-      'sellpoints.findMe': 'מצאו את הנקודה הקרובה אליי',
-      'sellpoints.locating': 'מאתר את המיקום שלכם...',
-      'sellpoints.nearest': 'הקרובה אליכם',
-      'sellpoints.distanceAway': 'במרחק {distance} ק"מ',
-      'sellpoints.geoUnsupported': 'הדפדפן שלכם לא תומך באיתור מיקום.',
-      'sellpoints.geoDenied': 'לא אישרתם גישה למיקום. ניתן לאפשר זאת בהגדרות הדפדפן ולנסות שוב.',
-      'sellpoints.geoError': 'לא הצלחנו לאתר את מיקומכם. נסו שוב.',
-      'sellpoints.empty': 'אין כרגע נקודות מכירה להצגה.',
-      'sellpoints.you': 'המיקום שלכם'
+      'footer.contactTitle': 'לפרטים והזמנות'
     }
   },
   en: {
@@ -101,18 +90,7 @@ const TRANSLATIONS = {
       'order.errorPickupLocation': 'Please choose a pickup location',
       'payment.prepayMessage': 'To complete your order, please transfer payment via Paybox or Bit to Eviatar',
       'payment.close': 'Close',
-      'footer.contactTitle': 'For orders & details',
-      'sellpoints.title': 'Sell Points',
-      'sellpoints.intro': 'All our sell points on one map — find the one closest to you.',
-      'sellpoints.findMe': 'Find the point closest to me',
-      'sellpoints.locating': 'Locating you...',
-      'sellpoints.nearest': 'Nearest to you',
-      'sellpoints.distanceAway': '{distance} km away',
-      'sellpoints.geoUnsupported': 'Your browser does not support location services.',
-      'sellpoints.geoDenied': 'Location access was not granted. You can enable it in your browser settings and try again.',
-      'sellpoints.geoError': "We couldn't find your location. Please try again.",
-      'sellpoints.empty': 'No sell points to show right now.',
-      'sellpoints.you': 'Your location'
+      'footer.contactTitle': 'For orders & details'
     }
   },
   fr: {
@@ -159,18 +137,7 @@ const TRANSLATIONS = {
       'order.errorPickupLocation': 'Veuillez choisir un lieu de retrait',
       'payment.prepayMessage': 'Pour finaliser votre commande, veuillez effectuer un paiement via Paybox ou Bit à Eviatar',
       'payment.close': 'Fermer',
-      'footer.contactTitle': 'Pour commandes et renseignements',
-      'sellpoints.title': 'Points de vente',
-      'sellpoints.intro': 'Tous nos points de vente sur une seule carte — trouvez le plus proche de vous.',
-      'sellpoints.findMe': 'Trouver le point le plus proche de moi',
-      'sellpoints.locating': 'Localisation en cours...',
-      'sellpoints.nearest': 'Le plus proche de vous',
-      'sellpoints.distanceAway': 'À {distance} km',
-      'sellpoints.geoUnsupported': 'Votre navigateur ne prend pas en charge la géolocalisation.',
-      'sellpoints.geoDenied': "L'accès à la localisation n'a pas été autorisé. Vous pouvez l'activer dans les paramètres de votre navigateur et réessayer.",
-      'sellpoints.geoError': "Nous n'avons pas pu localiser votre position. Veuillez réessayer.",
-      'sellpoints.empty': 'Aucun point de vente à afficher pour le moment.',
-      'sellpoints.you': 'Votre position'
+      'footer.contactTitle': 'Pour commandes et renseignements'
     }
   }
 };
