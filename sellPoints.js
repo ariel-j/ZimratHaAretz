@@ -1,10 +1,11 @@
 // Single source of truth for all sell / pickup points.
 // To add a new sell point: add one object here (id must be unique,
 // used as the <option> value sent to the order backend). The pickup
-// dropdown and the interactive map both render from this array
-// automatically — no other file needs to change.
-// Coordinates are approximate (settlement/city center) — replace with an
-// exact address geocode when available for best "near you" accuracy.
+// dropdown renders from this array automatically — no other file
+// needs to change.
+// lat/lng are kept for a possible future map view; they are not
+// currently used anywhere and are unverified (approximate settlement/
+// city centers) — geocode precisely before relying on them again.
 const SELL_POINTS = [
   { id: 'elazar', he: 'אלעזר', en: 'Elazar', fr: 'Elazar', lat: 31.6423, lng: 35.1391 },
   { id: 'beersheva', he: 'באר שבע', en: 'Beer Sheva', fr: 'Beer Sheva', lat: 31.2530, lng: 34.7915 },
