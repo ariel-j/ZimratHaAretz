@@ -242,11 +242,36 @@ function initProductGallery() {
   if (images.length < 2) return;
 
   let activeIndex = 0;
-  setInterval(function () {
+  let intervalId = null;
+
+  function tick() {
     images[activeIndex].classList.remove('active');
     activeIndex = (activeIndex + 1) % images.length;
     images[activeIndex].classList.add('active');
-  }, 5000);
+  }
+
+  function start() {
+    if (intervalId === null) {
+      intervalId = setInterval(tick, 5000);
+    }
+  }
+
+  function stop() {
+    if (intervalId !== null) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  }
+
+  // WCAG 2.2.2: don't auto-play for users who asked for reduced motion,
+  // and stay stopped if the accessibility menu already disabled animations.
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stopRequested = document.documentElement.classList.contains('a11y-stop-animations');
+  if (!prefersReducedMotion && !stopRequested) {
+    start();
+  }
+
+  window.productGalleryControls = { start: start, stop: stop };
 }
 
 // ===== INIT =====

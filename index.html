@@ -12,24 +12,26 @@
 </head>
 <body>
 
+<a href="#main" class="skip-link" data-i18n="a11y.skipToContent">דלג לתוכן הראשי</a>
+
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
     <div class="brand">
       <img src="assets/logo.svg" alt="" class="brand-mark">
       <span class="brand-name" data-i18n="brand.name">זמרת הארץ</span>
-      <div class="header-gallery">
-        <img src="assets/1000564425.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564404.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img active">
-        <img src="assets/1000564407.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564410.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564413.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564416.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564419.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564422.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564428.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564431.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
-        <img src="assets/1000564434.jpg" alt="צנצנת דבש זמרת הארץ" class="gallery-img">
+      <div class="header-gallery" role="img" aria-label="צנצנת דבש זמרת הארץ" data-i18n-aria-label="gallery.imageAlt">
+        <img src="assets/1000564425.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564404.jpg" alt="" aria-hidden="true" class="gallery-img active">
+        <img src="assets/1000564407.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564410.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564413.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564416.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564419.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564422.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564428.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564431.jpg" alt="" aria-hidden="true" class="gallery-img">
+        <img src="assets/1000564434.jpg" alt="" aria-hidden="true" class="gallery-img">
       </div>
     </div>
     <nav class="header-actions">
@@ -47,7 +49,7 @@
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
 
   <!-- HERO -->
   <section class="hero">
@@ -98,9 +100,9 @@
             <span class="qty-price">₪65</span>
           </div>
           <div class="qty-stepper">
-            <button type="button" class="qty-btn" data-target="qty1kg" data-delta="-1" aria-label="minus">−</button>
+            <button type="button" class="qty-btn" data-target="qty1kg" data-delta="-1" data-i18n-aria-label="order.decreaseQty" aria-label="הפחתת כמות">−</button>
             <input type="number" id="qty1kg" name="qty1kg" value="0" min="0" max="99" inputmode="numeric">
-            <button type="button" class="qty-btn" data-target="qty1kg" data-delta="1" aria-label="plus">+</button>
+            <button type="button" class="qty-btn" data-target="qty1kg" data-delta="1" data-i18n-aria-label="order.increaseQty" aria-label="הוספת כמות">+</button>
           </div>
         </div>
 
@@ -110,9 +112,9 @@
             <span class="qty-price">₪35</span>
           </div>
           <div class="qty-stepper">
-            <button type="button" class="qty-btn" data-target="qty500g" data-delta="-1" aria-label="minus">−</button>
+            <button type="button" class="qty-btn" data-target="qty500g" data-delta="-1" data-i18n-aria-label="order.decreaseQty" aria-label="הפחתת כמות">−</button>
             <input type="number" id="qty500g" name="qty500g" value="0" min="0" max="99" inputmode="numeric">
-            <button type="button" class="qty-btn" data-target="qty500g" data-delta="1" aria-label="plus">+</button>
+            <button type="button" class="qty-btn" data-target="qty500g" data-delta="1" data-i18n-aria-label="order.increaseQty" aria-label="הוספת כמות">+</button>
           </div>
         </div>
 
@@ -122,9 +124,9 @@
             <span class="qty-price">₪25</span>
           </div>
           <div class="qty-stepper">
-            <button type="button" class="qty-btn" data-target="qty350g" data-delta="-1" aria-label="minus">−</button>
+            <button type="button" class="qty-btn" data-target="qty350g" data-delta="-1" data-i18n-aria-label="order.decreaseQty" aria-label="הפחתת כמות">−</button>
             <input type="number" id="qty350g" name="qty350g" value="0" min="0" max="99" inputmode="numeric">
-            <button type="button" class="qty-btn" data-target="qty350g" data-delta="1" aria-label="plus">+</button>
+            <button type="button" class="qty-btn" data-target="qty350g" data-delta="1" data-i18n-aria-label="order.increaseQty" aria-label="הוספת כמות">+</button>
           </div>
         </div>
       </fieldset>
@@ -178,7 +180,7 @@
   <span aria-hidden="true">&#9855;</span>
 </button>
 
-<div id="a11yPanel" class="a11y-panel hidden" role="dialog" aria-modal="false" aria-labelledby="a11yPanelTitle">
+<div id="a11yPanel" class="a11y-panel hidden" role="dialog" aria-modal="true" aria-labelledby="a11yPanelTitle">
   <div class="a11y-panel-header">
     <h2 id="a11yPanelTitle" data-i18n="a11y.title">תפריט נגישות</h2>
     <button type="button" id="closeA11yPanel" class="a11y-close" data-i18n-aria-label="payment.close" aria-label="סגירה">&times;</button>

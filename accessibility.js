@@ -45,6 +45,16 @@
       var btn = document.querySelector('[data-a11y-toggle="' + name + '"]');
       if (btn) btn.classList.toggle('active', isOn);
     });
+
+    if (window.productGalleryControls) {
+      var stopAnimations = !!state.toggles['stop-animations'];
+      var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (stopAnimations || prefersReducedMotion) {
+        window.productGalleryControls.stop();
+      } else {
+        window.productGalleryControls.start();
+      }
+    }
   }
 
   function applyAll() {
@@ -145,6 +155,69 @@
     });
   }
 
+  // ===== FOCUS MANAGEMENT FOR PANELS/DIALOGS =====
+  // Moves focus in on open, traps Tab within the dialog, restores focus to the
+  // trigger on close, and closes on Escape. Works via MutationObserver so it
+  // stays decoupled from whatever code toggles the "hidden" class.
+  function getFocusable(container) {
+    var selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    return Array.prototype.slice.call(container.querySelectorAll(selector)).filter(function (el) {
+      return !el.disabled && el.offsetParent !== null;
+    });
+  }
+
+  function manageDialogFocus(el, closeFn) {
+    var lastFocused = null;
+
+    function trapKeydown(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeFn();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      var focusables = getFocusable(el);
+      if (!focusables.length) return;
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    new MutationObserver(function () {
+      var isVisible = !el.classList.contains('hidden');
+      if (isVisible) {
+        lastFocused = document.activeElement;
+        var focusables = getFocusable(el);
+        (focusables[0] || el).focus();
+        el.addEventListener('keydown', trapKeydown);
+      } else {
+        el.removeEventListener('keydown', trapKeydown);
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+          lastFocused.focus();
+        }
+      }
+    }).observe(el, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  function initDialogFocusManagement() {
+    manageDialogFocus(document.getElementById('a11yPanel'), function () { togglePanel(false); });
+    manageDialogFocus(document.getElementById('a11yStatementModal'), function () {
+      document.getElementById('closeA11yStatement').click();
+    });
+    var paymentModal = document.getElementById('paymentModal');
+    if (paymentModal) {
+      manageDialogFocus(paymentModal, function () {
+        document.getElementById('closePaymentModal').click();
+      });
+    }
+  }
+
   window.initAccessibilityWidget = function () {
     loadState();
     applyAll();
@@ -153,6 +226,7 @@
     initResetAll();
     initPanelToggle();
     initStatementModal();
+    initDialogFocusManagement();
   };
 
   document.addEventListener('DOMContentLoaded', window.initAccessibilityWidget);
