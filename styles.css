@@ -555,10 +555,14 @@ html.a11y-contrast h3,
 html.a11y-contrast p,
 html.a11y-contrast span {
   background-color: #000 !important;
+  background-image: none !important;
   color: #FFD400 !important;
   border-color: #FFD400 !important;
 }
 html.a11y-contrast img { filter: grayscale(1) contrast(1.2); }
+html.a11y-contrast .support-banner {
+  background: #000 !important;
+}
 
 html.a11y-grayscale { filter: grayscale(1); }
 
@@ -568,7 +572,10 @@ html.a11y-readable-font body,
 html.a11y-readable-font input,
 html.a11y-readable-font select,
 html.a11y-readable-font textarea,
-html.a11y-readable-font button {
+html.a11y-readable-font button,
+html.a11y-readable-font h1,
+html.a11y-readable-font h2,
+html.a11y-readable-font h3 {
   font-family: Arial, Helvetica, sans-serif !important;
   letter-spacing: 0.01em;
 }
