@@ -43,7 +43,22 @@ const TRANSLATIONS = {
       'order.errorPickupLocation': 'נא לבחור מיקום איסוף',
       'payment.prepayMessage': 'להשלמת ההזמנה נא להעביר תשלום בפייבוקס או בביט לאביתר',
       'payment.close': 'סגירה',
-      'footer.contactTitle': 'לפרטים והזמנות'
+      'footer.contactTitle': 'לפרטים והזמנות',
+      'a11y.openMenu': 'תפריט נגישות',
+      'a11y.title': 'תפריט נגישות',
+      'a11y.increaseFont': 'הגדלת טקסט',
+      'a11y.decreaseFont': 'הקטנת טקסט',
+      'a11y.resetFont': 'איפוס גודל טקסט',
+      'a11y.contrast': 'ניגודיות גבוהה',
+      'a11y.grayscale': 'גווני אפור',
+      'a11y.underlineLinks': 'הדגשת קישורים',
+      'a11y.readableFont': 'גופן קריא',
+      'a11y.stopAnimations': 'עצירת אנימציות',
+      'a11y.bigCursor': 'סמן גדול',
+      'a11y.reset': 'איפוס הגדרות',
+      'a11y.statementLink': 'הצהרת נגישות',
+      'a11y.statementTitle': 'הצהרת נגישות',
+      'a11y.statementBody': 'אתר "זמרת הארץ" פועל להנגשת השירותים והתכנים שלו לכלל הציבור, לרבות אנשים עם מוגבלות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ובהתאם לתקן הישראלי ת"י 5568 ברמת AA. באתר הוטמע תפריט נגישות המאפשר, בין היתר, שינוי גודל טקסט, הגברת ניגודיות, גווני אפור, הדגשת קישורים, מעבר לגופן קריא ועצירת אנימציות. במידה ונתקלתם בבעיית נגישות או שיש לכם הצעות לשיפור, נשמח שתפנו אלינו: אביתר רייכמן, בטלפון 054-5623140.'
     }
   },
   en: {
@@ -90,7 +105,22 @@ const TRANSLATIONS = {
       'order.errorPickupLocation': 'Please choose a pickup location',
       'payment.prepayMessage': 'To complete your order, please transfer payment via Paybox or Bit to Eviatar',
       'payment.close': 'Close',
-      'footer.contactTitle': 'For orders & details'
+      'footer.contactTitle': 'For orders & details',
+      'a11y.openMenu': 'Accessibility menu',
+      'a11y.title': 'Accessibility menu',
+      'a11y.increaseFont': 'Increase text size',
+      'a11y.decreaseFont': 'Decrease text size',
+      'a11y.resetFont': 'Reset text size',
+      'a11y.contrast': 'High contrast',
+      'a11y.grayscale': 'Grayscale',
+      'a11y.underlineLinks': 'Underline links',
+      'a11y.readableFont': 'Readable font',
+      'a11y.stopAnimations': 'Stop animations',
+      'a11y.bigCursor': 'Large cursor',
+      'a11y.reset': 'Reset settings',
+      'a11y.statementLink': 'Accessibility statement',
+      'a11y.statementTitle': 'Accessibility statement',
+      'a11y.statementBody': 'The "Zimrat HaAretz" website is committed to making its services and content accessible to the general public, including people with disabilities, in accordance with the Israeli Equal Rights for Persons with Disabilities (Service Accessibility Adjustments) Regulations, 2013, and Israeli Standard 5568 at level AA. The site includes an accessibility menu offering, among other things, text resizing, contrast adjustment, grayscale mode, link underlining, a readable font, and the ability to stop animations. If you encounter an accessibility issue or have suggestions for improvement, please contact us: Eviatar Reichman, phone 054-5623140.'
     }
   },
   fr: {
@@ -137,7 +167,22 @@ const TRANSLATIONS = {
       'order.errorPickupLocation': 'Veuillez choisir un lieu de retrait',
       'payment.prepayMessage': 'Pour finaliser votre commande, veuillez effectuer un paiement via Paybox ou Bit à Eviatar',
       'payment.close': 'Fermer',
-      'footer.contactTitle': 'Pour commandes et renseignements'
+      'footer.contactTitle': 'Pour commandes et renseignements',
+      'a11y.openMenu': 'Menu accessibilité',
+      'a11y.title': 'Menu accessibilité',
+      'a11y.increaseFont': 'Agrandir le texte',
+      'a11y.decreaseFont': 'Réduire le texte',
+      'a11y.resetFont': 'Réinitialiser la taille du texte',
+      'a11y.contrast': 'Contraste élevé',
+      'a11y.grayscale': 'Niveaux de gris',
+      'a11y.underlineLinks': 'Souligner les liens',
+      'a11y.readableFont': 'Police lisible',
+      'a11y.stopAnimations': 'Arrêter les animations',
+      'a11y.bigCursor': 'Grand curseur',
+      'a11y.reset': 'Réinitialiser les paramètres',
+      'a11y.statementLink': 'Déclaration d\'accessibilité',
+      'a11y.statementTitle': 'Déclaration d\'accessibilité',
+      'a11y.statementBody': 'Le site "Zimrat HaAretz" s\'engage à rendre ses services et contenus accessibles au grand public, y compris aux personnes en situation de handicap, conformément au règlement israélien sur l\'égalité des droits des personnes handicapées (aménagements d\'accessibilité des services), 2013, et à la norme israélienne 5568 niveau AA. Le site propose un menu d\'accessibilité permettant notamment de modifier la taille du texte, d\'augmenter le contraste, d\'activer les niveaux de gris, de souligner les liens, d\'utiliser une police lisible et d\'arrêter les animations. Si vous rencontrez un problème d\'accessibilité ou avez des suggestions d\'amélioration, n\'hésitez pas à nous contacter : Eviatar Reichman, téléphone 054-5623140.'
     }
   }
 };

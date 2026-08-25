@@ -19,6 +19,14 @@ function applyLanguage(langCode) {
     }
   });
 
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
+    const key = el.getAttribute('data-i18n-aria-label');
+    const value = dict.strings[key];
+    if (value !== undefined) {
+      el.setAttribute('aria-label', value);
+    }
+  });
+
   currentLang = langCode;
 
   document.querySelectorAll('#langSwitcher .lang-option').forEach(function (button) {
