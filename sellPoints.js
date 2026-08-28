@@ -23,5 +23,6 @@ const SELL_POINTS = [
   { id: 'netanya', he: 'נתניה (גונס סלה)', en: 'Netanya (Gunas Sela)', fr: 'Netanya (Gunas Sela)', lat: 32.3215, lng: 34.8532 },
   { id: 'adurayim', he: 'אדוריים', en: 'Adurayim', fr: 'Adurayim', lat: 31.5860, lng: 34.7460 },
   { id: 'beitShemesh', he: 'בית שמש (נחל נחשון 6)', en: 'Beit Shemesh (Nachal Nachshon 6)', fr: 'Beit Shemesh (Nachal Nachshon 6)', lat: 31.7452, lng: 34.9925 },
-  { id: 'mevaseret', he: 'מבשרת (הבושם 34)', en: 'Mevaseret (HaBosem 34)', fr: 'Mevasseret (HaBosem 34)', lat: 31.8000, lng: 35.1500 }
+  { id: 'mevaseret', he: 'מבשרת (הבושם 34)', en: 'Mevaseret (HaBosem 34)', fr: 'Mevasseret (HaBosem 34)', lat: 31.8000, lng: 35.1500 },
+  { id: 'kiryatMalachi', he: 'קרית מלאכי (משפחת איראני)', en: 'Kiryat Malachi (Irani Family)', fr: 'Kiryat Malachi (famille Irani)', lat: 31.7315, lng: 34.7460 }
 ];
