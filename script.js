@@ -62,7 +62,8 @@ function initQuantitySteppers() {
   });
 
   ['qty1kg', 'qty500g', 'qty350g'].forEach(function (id) {
-    document.getElementById(id).addEventListener('input', updateTotalPrice);
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', updateTotalPrice);
   });
 }
 
@@ -117,6 +118,7 @@ function buildDistributorText(pickupLocation) {
 // ===== PICKUP DROPDOWN (rendered from SELL_POINTS) =====
 function renderPickupOptions(langCode) {
   const select = document.getElementById('pickupLocation');
+  if (!select) return;
   const previousValue = select.value;
 
   select.querySelectorAll('option[data-sell-point]').forEach(function (option) {
@@ -200,6 +202,7 @@ async function submitOrder(formData) {
 function initOrderForm() {
   const form = document.getElementById('orderForm');
   const submitButton = document.getElementById('submitBtn');
+  if (!form || !submitButton) return;
 
   form.addEventListener('submit', async function (event) {
     event.preventDefault();

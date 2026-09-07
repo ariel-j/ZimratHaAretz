@@ -282,6 +282,21 @@ img { max-width: 100%; display: block; }
   padding: 28px;
 }
 
+.order-closed-message {
+  background: var(--color-bg-alt);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.order-closed-message a {
+  color: var(--color-gold, #c9a227);
+  font-weight: 600;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
